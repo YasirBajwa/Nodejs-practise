@@ -16,7 +16,7 @@ const app = express();
 const port = 3001;
 
 // config env file
-// require('dotenv').config();
+require('dotenv').config();
 
 // connect to database
 
@@ -36,6 +36,7 @@ app.use(express.json())
 
 
 app.use('/api/contacts', require('./src/routes/contacts'));
+app.use('/api/user', require('./src/routes/users'));
 
 app.use(errorHandler);
 
