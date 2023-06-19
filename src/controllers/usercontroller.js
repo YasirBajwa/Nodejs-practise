@@ -17,9 +17,7 @@ const registerUser =  asyncHandler(async(req, res) => {
         throw new Error('Please provide all fields');
 
     }
-   
     const userAvailable = await User.findOne({email});
-
     if(userAvailable){
         res.status(400);
         throw new Error('User already exist');
@@ -55,7 +53,7 @@ const registerUser =  asyncHandler(async(req, res) => {
 
 const loginUser=  asyncHandler(async(req, res) => {
     const {email, password} = req.body;
-    
+
     if(!email || !password){
         res.status(400);
         throw new Error('Please provide all fields');
@@ -73,21 +71,20 @@ const loginUser=  asyncHandler(async(req, res) => {
             }
         }
         ,process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn:'30d',
+            expiresIn:'10m',
             })
         res.status(200).json({accesToken,message:'User login successfully'})
     }
     else{
-        res.status(400);
+        res.status(401);
         throw new Error('Invalid user data');
     }
 })
-
 // @desc    Get current user
 // @route   GET /api/user/current
 // @access  Private
-const currentUser=  asyncHandler(async(req, res) => {
-    res.json({message: 'user profile'});
+const currentUser = asyncHandler(async(req, res) => {
+    res.json(req.user);
 })
 // @desc    Logout user
 // @route   GET /api/user/logout
