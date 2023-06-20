@@ -4,9 +4,7 @@ const errorHandler = require('./src/middleware/errorHandler');
 require('./src/config/db')();
 const app = express();
 
-const port = 3001;
 require('dotenv').config();
-
 
 // Body Parser
 app.use(express.json())
@@ -17,7 +15,7 @@ app.use('/api/user', require('./src/routes/users'));
 
 app.use(errorHandler);
 
-// const port = process.env.PORT ? process.env.PORT : 5000;
+const port = process.env.PORT ? process.env.PORT : 5000;
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
