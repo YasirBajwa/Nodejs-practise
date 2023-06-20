@@ -53,14 +53,16 @@ const registerUser =  asyncHandler(async(req, res) => {
 
 const loginUser=  asyncHandler(async(req, res) => {
     const {email, password} = req.body;
-
     if(!email || !password){
         res.status(400);
         throw new Error('Please provide all fields');
 
     }
-
     const user= await User.findOne({email});
+    if (!user) {
+        res.status(401);
+        throw new Error('Invalid user data');
+    }
     const comparePassword = await bcrypt.compare(password, user.password);
     if(user && comparePassword){
         const accesToken = jwt.sign({

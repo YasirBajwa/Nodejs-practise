@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-const mongoURI = process.env.MONGODB_URL ? process.env.MONGODB_URL : 'mongodb://localhost:27017/test';
+const mongoURI = 'mongodb://localhost:27018/test';
 
 module.exports = async () => {
+    console.log('mongoURI',mongoURI)
     try {
         await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
