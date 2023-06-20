@@ -5,7 +5,6 @@ require('./src/config/db')();
 const app = express();
 
 const port = 3001;
-// config env file
 require('dotenv').config();
 
 
